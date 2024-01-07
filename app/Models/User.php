@@ -42,4 +42,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //Quando é relacionamento 1 para 1, o nome deve ser no singular
+    public function preference()
+    {
+        //relacionamento 1 para 1
+        return $this->hasOne(Preference::class);
+    }
+
+    public function permissions()
+    {
+        //retorna as permissões do usuário
+        return $this->belongsToMany(Permission::class)->withPivot(['active']);
+
+    }
 }
